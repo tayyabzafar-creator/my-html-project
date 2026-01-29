@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Garments ERP Pro - Full Editable + DPR</title>
+<title>Garments ERP Pro - Professional</title>
 <style>
-body{font-family:'Segoe UI',Tahoma,sans-serif;margin:0;background:#f4f6f8;color:#111}
-header{background:linear-gradient(90deg,#2563eb,#3b82f6);color:#fff;padding:15px;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
+body{margin:0;font-family:'Segoe UI',Tahoma,sans-serif;background:#f4f6f8;color:#111}
+header{background:linear-gradient(90deg,#2563eb,#3b82f6);color:#fff;padding:15px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
 header h2{margin:0;font-weight:600}
-nav{margin-top:10px}
-nav button{margin-right:8px;padding:8px 14px;border:none;cursor:pointer;border-radius:5px;background:#1d4ed8;color:#fff;transition:0.3s}
+nav button{margin-right:10px;padding:8px 16px;border:none;border-radius:5px;background:#1d4ed8;color:#fff;cursor:pointer;transition:0.3s}
 nav button:hover{background:#2563eb}
 section{display:none;padding:20px;transition:0.3s}
 .active{display:block}
 .card{background:#fff;padding:20px;margin-bottom:20px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.08)}
-h3,h4{margin-top:0;color:#1e293b}
-input,select{width:100%;padding:8px;margin-bottom:8px;border:1px solid #cbd5e1;border-radius:6px;outline:none;transition:0.2s}
+input,select{width:100%;padding:8px;margin-bottom:10px;border:1px solid #cbd5e1;border-radius:6px;outline:none;transition:0.2s}
 input:focus,select:focus{border-color:#2563eb;box-shadow:0 0 6px rgba(37,99,235,0.3)}
 button{padding:6px 12px;border:none;color:#fff;cursor:pointer;border-radius:6px;transition:0.3s}
 button:hover{opacity:0.9}
@@ -30,9 +28,8 @@ tfoot td{font-weight:bold;background:#e2e8f0}
 .highlight-red{background:#fca5a5}
 .highlight-green{background:#86efac}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;overflow:auto}
-.modal-content{background:#fff;margin:50px auto;padding:20px;width:95%;max-width:850px;border-radius:10px;position:relative;box-shadow:0 6px 20px rgba(0,0,0,0.25)}
+.modal-content{background:#fff;margin:50px auto;padding:20px;width:95%;max-width:900px;border-radius:10px;position:relative;box-shadow:0 6px 20px rgba(0,0,0,0.25)}
 .close{position:absolute;right:15px;top:10px;cursor:pointer;color:#dc2626;font-weight:bold;font-size:18px}
-#chartContainer{width:100%;max-width:900px;margin-top:20px}
 .editBtn{background:#16a34a;margin-right:4px}
 .delBtn{background:#dc2626}
 </style>
@@ -45,7 +42,7 @@ tfoot td{font-weight:bold;background:#e2e8f0}
 <button onclick="show('dashboard')">Dashboard</button>
 <button onclick="show('booking')">Booking</button>
 <button onclick="show('production')">Production</button>
-<button onclick="show('dpr')">Daily Production Report</button>
+<button onclick="show('dpr')">Daily Report</button>
 </nav>
 </header>
 
@@ -73,12 +70,11 @@ tfoot td{font-weight:bold;background:#e2e8f0}
 <input id="bookDate" type="date">
 <button onclick="saveBooking()" style="background:#2563eb">Save Booking</button>
 </div>
+
 <div class="card">
 <table>
 <thead>
-<tr>
-<th>Customer</th><th>Order</th><th>Style</th><th>Qty</th><th>Ex-Factory</th><th>Action</th>
-</tr>
+<tr><th>Customer</th><th>Order</th><th>Style</th><th>Qty</th><th>Ex-Factory</th><th>Action</th></tr>
 </thead>
 <tbody id="bookingList"></tbody>
 </table>
@@ -89,31 +85,24 @@ tfoot td{font-weight:bold;background:#e2e8f0}
 <section id="production">
 <div class="card">
 <h3>🏭 Production Status</h3>
-<b>Date:</b> <span id="nowDate"></span><br><br>
-<input id="pOrderNo" placeholder="Enter Order No (NSPL#)">
+<input id="pOrderNo" placeholder="Order No">
 <select id="depSelect">
-<option value="Cutting">Cutting</option>
-<option value="Sewing">Sewing</option>
-<option value="Washing">Washing</option>
-<option value="Finishing">Finishing</option>
-<option value="Packing">Packing</option>
-<option value="Dispatched">Dispatched</option>
+<option>Cutting</option><option>Sewing</option><option>Washing</option>
+<option>Finishing</option><option>Packing</option><option>Dispatched</option>
 </select>
-<input id="depQty" type="number" placeholder="Enter Qty">
+<input id="depQty" type="number" placeholder="Qty">
+<input type="date" id="depDate">
 <button onclick="addDepartmentQty()" style="background:#2563eb">Add Qty</button>
 <button onclick="viewOrderHistory()" style="background:#10b981">View History</button>
 </div>
+
 <div class="card">
 <table>
 <thead>
 <tr>
-<th>Order No</th><th>Customer</th><th>Order Qty</th>
-<th>Total Cutting</th><th>BL Cutting</th>
-<th>Total Sewing</th><th>BL Sewing</th>
-<th>Total Washing</th><th>BL Washing</th>
-<th>Total Finishing</th><th>BL Finishing</th>
-<th>Total Packing</th><th>BL Packing</th>
-<th>Total Dispatched</th><th>BL Dispatched</th>
+<th>Order</th><th>Customer</th><th>Order Qty</th>
+<th>Total Cutting</th><th>Total Sewing</th><th>Total Washing</th>
+<th>Total Finishing</th><th>Total Packing</th><th>Total Dispatched</th>
 <th>Action</th>
 </tr>
 </thead>
@@ -138,63 +127,173 @@ tfoot td{font-weight:bold;background:#e2e8f0}
 <section id="dpr">
 <div class="card">
 <h3>📊 Daily Production Report</h3>
-<label>Select Month:</label>
 <input type="month" id="dprMonth" onchange="renderDPR()">
-<br><br>
-<label>Monthly Target:</label>
-<input type="number" id="monthlyTarget" placeholder="Enter Monthly Target" oninput="renderDPR()">
-<button onclick="exportPDF()" style="background:#2563eb;margin-top:5px">Export PDF</button>
-</div>
-
-<div class="card">
-<h4>📈 Avg Production / Day</h4>
-<div id="avgPerDay"></div>
-</div>
-
-<div class="card">
-<h4>🏭 Department Totals</h4>
-<div id="deptTotals"></div>
+<input type="number" id="monthlyTarget" placeholder="Monthly Target" oninput="renderDPR()">
 </div>
 
 <div class="card">
 <table id="dprTable">
-<thead>
-<tr>
-<th>Date</th>
-<th>Cutting</th>
-<th>Sew L1</th><th>Sew L2</th><th>Sew L3</th><th>Total Sewing</th>
-<th>Wash A</th><th>Wash B</th><th>Wash C</th><th>Total Washing</th>
-<th>Finishing</th>
-<th>Pack M</th><th>Pack E</th><th>Total Packing</th>
-<th>Shipment</th>
-<th>Action</th>
-</tr>
-</thead>
+<thead><tr><th>Date</th><th>Cutting</th><th>Sewing</th><th>Washing</th><th>Finishing</th><th>Packing</th><th>Dispatched</th><th>Action</th></tr></thead>
 <tbody></tbody>
-<tfoot>
-<tr id="dprTotals">
-<td>TOTAL</td>
-<td id="tCut">0</td>
-<td id="tS1">0</td><td id="tS2">0</td><td id="tS3">0</td><td id="tSew">0</td>
-<td id="tWA">0</td><td id="tWB">0</td><td id="tWC">0</td><td id="tWash">0</td>
-<td id="tFinishing">0</td>
-<td id="tPM">0</td><td id="tPE">0</td><td id="tPack">0</td>
-<td id="tShip">0</td>
-<td></td>
-</tr>
-</tfoot>
+<tfoot><tr id="dprTotals"><td>TOTAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr></tfoot>
 </table>
 </div>
+</section>
 
-<div class="card" id="chartContainer">
-<canvas id="deptChart"></canvas>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-// JavaScript code: Booking, Production Status, History modal, DPR, Charts, PDF export
-// (Same logic as previous version, extended to DPR edit/delete + charts + PDF)
+// ---------- GLOBAL ----------
+let bookings=JSON.parse(localStorage.getItem("bookings"))||[];
+let productions=JSON.parse(localStorage.getItem("productions"))||[];
+let history=JSON.parse(localStorage.getItem("history"))||[];
+
+// ---------- NAV ----------
+function show(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+renderAll();
+}
+
+// ---------- BOOKING ----------
+function saveBooking(){
+let b={customer:customer.value,orderNo:orderNo.value,style:style.value,qty:+qty.value,exDate:exDate.value};
+bookings.push(b);
+localStorage.setItem("bookings",JSON.stringify(bookings));
+customer.value=orderNo.value=style.value=wash.value=qty.value=fabric.value=exDate.value=bookDate.value="";
+renderBooking();
+renderDashboard();
+}
+function renderBooking(){
+bookingList.innerHTML="";
+bookings.forEach((b,i)=>{
+let tr=document.createElement("tr");
+tr.innerHTML=`<td>${b.customer}</td><td>${b.orderNo}</td><td>${b.style}</td><td>${b.qty}</td><td>${b.exDate}</td>
+<td><button onclick="bookings.splice(${i},1);localStorage.setItem('bookings',JSON.stringify(bookings));renderBooking();renderDashboard()">Del</button></td>`;
+bookingList.appendChild(tr);
+});
+}
+
+// ---------- DASHBOARD ----------
+function renderDashboard(){
+kpiOrders.innerText=bookings.length;
+kpiQty.innerText=bookings.reduce((a,b)=>a+b.qty,0);
+kpiUrgent.innerText=bookings.filter(b=>{let d=(new Date(b.exDate)-new Date())/(1000*60*60*24); return d<=35}).length;
+kpiProd.innerText=productions.length;
+}
+
+// ---------- PRODUCTION ----------
+function addDepartmentQty(){
+let o=pOrderNo.value.trim();
+if(!o) return alert("Order No required");
+let dep=depSelect.value;
+let qty=+depQty.value;
+let date=depDate.value;
+if(!qty||!date) return alert("Qty & Date required");
+let prod=productions.find(p=>p.orderNo===o);
+if(!prod){
+let b=bookings.find(bk=>bk.orderNo===o);
+if(!b) return alert("Order not found in booking");
+prod={orderNo:o,customer:b.customer,orderQty:b.qty,totalCutting:0,totalSewing:0,totalWashing:0,totalFinishing:0,totalPacking:0,totalDispatched:0};
+productions.push(prod);
+}
+prod["total"+dep]= (prod["total"+dep]||0)+qty;
+history.push({orderNo:o,department:dep,qty:qty,date:date});
+localStorage.setItem("productions",JSON.stringify(productions));
+localStorage.setItem("history",JSON.stringify(history));
+pOrderNo.value=depQty.value=depDate.value="";
+renderProduction();
+}
+
+function renderProduction(){
+prodStatusTable.innerHTML="";
+productions.forEach((p,i)=>{
+let tr=document.createElement("tr");
+tr.innerHTML=`<td>${p.orderNo}</td><td>${p.customer}</td><td>${p.orderQty}</td>
+<td>${p.totalCutting||0}</td><td>${p.totalSewing||0}</td>
+<td>${p.totalWashing||0}</td><td>${p.totalFinishing||0}</td>
+<td>${p.totalPacking||0}</td><td>${p.totalDispatched||0}</td>
+<td><button onclick="deleteProduction(${i})" class="delBtn">Del</button></td>`;
+prodStatusTable.appendChild(tr);
+});
+}
+
+function deleteProduction(i){
+if(confirm("Delete this production?")){
+productions.splice(i,1);
+localStorage.setItem("productions",JSON.stringify(productions));
+renderProduction();
+}
+}
+
+// ---------- HISTORY MODAL ----------
+function viewOrderHistory(){
+let o=pOrderNo.value.trim();
+if(!o) return alert("Enter Order No");
+historyModal.style.display="block";
+let tbody=historyTable.querySelector("tbody");
+tbody.innerHTML="";
+history.filter(h=>h.orderNo===o).forEach((h,i)=>{
+let tr=document.createElement("tr");
+tr.innerHTML=`<td>${h.date}</td><td>${h.department}</td><td>${h.qty}</td>
+<td><button onclick="deleteHistory(${i})" class="delBtn">Del</button></td>`;
+tbody.appendChild(tr);
+});
+}
+function deleteHistory(i){history.splice(i,1);localStorage.setItem("history",JSON.stringify(history));viewOrderHistory();}
+function closeModal(){historyModal.style.display="none";}
+
+// ---------- DPR ----------
+function renderDPR(){
+let month=document.getElementById("dprMonth").value;
+if(!month) return;
+let [y,mo]=month.split("-");
+let days=new Date(y,mo,0).getDate();
+let tbody=dprTable.querySelector("tbody");
+tbody.innerHTML="";
+let totals={Cutting:0,Sewing:0,Washing:0,Finishing:0,Packing:0,Dispatched:0};
+for(let d=1;d<=days;d++){
+let dateStr=`${y}-${mo.padStart(2,'0')}-${d.toString().padStart(2,'0')}`;
+let dt=new Date(y,mo-1,d);
+let row=history.filter(h=>h.date===dateStr).reduce((acc,h)=>{acc[h.department]+=h.qty;return acc;},{Cutting:0,Sewing:0,Washing:0,Finishing:0,Packing:0,Dispatched:0});
+totals.Cutting+=row.Cutting; totals.Sewing+=row.Sewing; totals.Washing+=row.Washing; totals.Finishing+=row.Finishing; totals.Packing+=row.Packing; totals.Dispatched+=row.Dispatched;
+let tr=document.createElement("tr");
+if(dt.getDay()===0) tr.classList.add("sunday");
+tr.innerHTML=`<td>${dateStr}</td>
+<td contenteditable="true" oninput="updateDPR('${dateStr}','Cutting',this.innerText)">${row.Cutting}</td>
+<td contenteditable="true" oninput="updateDPR('${dateStr}','Sewing',this.innerText)">${row.Sewing}</td>
+<td contenteditable="true" oninput="updateDPR('${dateStr}','Washing',this.innerText)">${row.Washing}</td>
+<td contenteditable="true" oninput="updateDPR('${dateStr}','Finishing',this.innerText)">${row.Finishing}</td>
+<td contenteditable="true" oninput="updateDPR('${dateStr}','Packing',this.innerText)">${row.Packing}</td>
+<td contenteditable="true" oninput="updateDPR('${dateStr}','Dispatched',this.innerText)">${row.Dispatched}</td>
+<td><button onclick="deleteDPR('${dateStr}')" class="delBtn">Del</button></td>`;
+tbody.appendChild(tr);
+}
+let tfoot=dprTable.querySelector("tfoot tr");
+tfoot.cells[1].innerText=totals.Cutting;
+tfoot.cells[2].innerText=totals.Sewing;
+tfoot.cells[3].innerText=totals.Washing;
+tfoot.cells[4].innerText=totals.Finishing;
+tfoot.cells[5].innerText=totals.Packing;
+tfoot.cells[6].innerText=totals.Dispatched;
+}
+
+function updateDPR(date,dep,val){
+let q=+val||0;
+let h=history.filter(h=>h.date===date && h.department===dep);
+if(h.length>0) h.forEach(x=>x.qty=q);
+else history.push({orderNo:"-",department:dep,qty:q,date:date});
+localStorage.setItem("history",JSON.stringify(history));
+renderDPR();
+}
+
+function deleteDPR(date){
+history=history.filter(h=>h.date!==date);
+localStorage.setItem("history",JSON.stringify(history));
+renderDPR();
+}
+
+// ---------- RENDER ----------
+function renderAll(){renderBooking();renderProduction();renderDashboard();renderDPR();}
+renderAll();
 </script>
 
 </body>
